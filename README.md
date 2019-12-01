@@ -13,19 +13,17 @@ This project utilizes concepts such as React-Router, React-Hooks, React-Context,
 For the CSS, we utilized the CSS Grid and have a utilities folder that decides the sizes of each image 
 
 Image attributions:
- 
-https://picsum.photos/
-
-https://unsplash.com/
+* https://picsum.photos/
+* https://unsplash.com/
 
 GitHub repo of images and JSON file
-https://github.com/bobziroll/scrimba-react-bootcamp-images
+* https://github.com/bobziroll/scrimba-react-bootcamp-images
 
 Icon library
-https://remixicon.com/
+* https://remixicon.com/
 
 Libraries
 * React Router - https://reacttraining.com/react-router/web/guides/quick-start
 * PropTypes - https://reactjs.org/docs/typechecking-with-proptypes.html
 
-This is a capstone project that is heavily derived from Bob Ziroll's "Become a professional React developer" and it's thanks to his course and also to Learn Academy's Coding Bootcamp, that I'm able to utilize fully understand React.
+This is a capstone project that is heavily derived from Bob Ziroll's "Become a professional React developer" and it's thanks to his course and also to Learn Academy's Coding Bootcamp, that I'm able to utilize and fully understand React to create this project.
