@@ -4,7 +4,7 @@ function Header() {
     return (
         <header>
             <h2>Welcome to The Photo Shop!</h2>
-            <i className="ri-shopping-cart-line ri-fw ri-2x"></i>
+            <i className="icon ion-md-cart ri-fw ri-2x"></i>
         </header>
     )
 }
