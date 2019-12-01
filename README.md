@@ -12,7 +12,8 @@ This project utilizes concepts such as React-Router, React-Hooks, React-Context,
 
 For the CSS, we utilized the CSS Grid and have a utilities folder that decides the sizes of each image 
 
- Image attributions:
+Image attributions:
+ 
 https://picsum.photos/
 
 https://unsplash.com/
