@@ -9,7 +9,7 @@ function App() {
         <div>
 
             <Header />
-            <Switch>
+            <Switch> {/** this switch is here to display any of the components that we want */}
                 <Route exact path="/">
                     <Photos />
                 </Route>
