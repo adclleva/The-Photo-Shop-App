@@ -1,6 +1,9 @@
 import React from "react"
 
-function Photos() {
+import Image from "../components/Image"
+import {getClass} from "../utilities"
+
+function Photos() { // this Photos component is to show all the image photos
     return (
         <main className="photos">
             <h1>Images go here</h1>
