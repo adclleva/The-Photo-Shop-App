@@ -84,3 +84,13 @@ Remember to make it so clicking the filled heart icon ALSO runs the toggleFavori
 
 Filled heart icon:
 <i className="ri-heart-fill favorite"></i>
+
+# Challenge 10
+
+Add propTypes to the Image component
+
+1. className should be a string
+2. img should be an object, specifically an object with `id`, `url`, and `isFavorite` properties
+    a. Hint: Specifying the properties of an object is called and object's "shape"
+
+https://reactjs.org/docs/typechecking-with-proptypes.html#proptypes

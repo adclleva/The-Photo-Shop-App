@@ -20,7 +20,7 @@ function ContextProvider({children}) { // we are using functional components for
 
     function toggleFavorited(photo_id) { // we don't want to modify state directly and this is to toggle the favorite functionality
         const newPhotosWithFavorited = photos.map(photo => {
-            if (photo.id == photo_id) {
+            if (photo.id === photo_id) {
                 return {
                     ...photo,
                     isFavorite: !photo.isFavorite

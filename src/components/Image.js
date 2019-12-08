@@ -1,9 +1,12 @@
 import React, { useState, useContext } from "react" // we'll be grabbing the state from the Context
 import { Context } from "../context/Context" // we'll use the Context object that we created to pass down the isFavorited function
                                              // we do a named import for Context
+import propTypes from "prop-types"
 
 function Image(props) { // we deconstuct the className and url from props in the arguments 
-    const { className, url, id, isFavorited } = props // these props are coming from the Photos page component
+    const { className, photoObj } = props // these props are coming from the Photos page component
+    const { url, id, isFavorited } = photoObj // url, id, isFavorited are the properties that come from the photo object               
+
     const [ hovered, setHovered ] = useState(false)
     const [ isCurrentlyFavorited, setIsCurrentlyFavorited ] = useState(isFavorited) //created a state for the image to see if it is favorited so we can put the image on there
                                                                                     // just realized that this may be reduntant but i left it here so it can be easier to understand
@@ -43,6 +46,12 @@ function Image(props) { // we deconstuct the className and url from props in the
         
         </div>
     )
+}
+
+// here is adding the propTypes for Type checking the Image component
+
+Image.propTypes = {  // the image should be an object with 
+
 }
 
 export default Image
