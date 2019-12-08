@@ -9,9 +9,9 @@ function Photos() { // this Photos component is to show all the image photos
     const { photos } = useContext(Context) // this grabs the "photos state" passed down from the React Context Object that we got
                                                         
     const displayPhotos = photos.map((photo, index) => {
-        const { id, url } = photo
+        const { id, url, isFavorite } = photo // we can get the isFavorited from the Context Provider
         return (
-            <Image key={id} id={id} className={getClass(id)} url={url} /> 
+            <Image key={id} id={id} className={getClass(id)} url={url} isFavorited={isFavorite}/>  
         )
     })
 
