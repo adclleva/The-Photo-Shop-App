@@ -42,3 +42,12 @@ Using the data in context state, map over it in the Photos page and display the 
 Get the allPhotos array from context
 map over it, creating <Image /> elements of the component we just made
 <Image key={???} img={<full image object here>} className={getClass(<index of image>)} />
+
+# Challenge
+
+On the Image component, track the hover state
+
+1. Create state boolean for "hovered"
+2. When the mouse enters the Image's div, set "hovered" to true
+3. When the mouse leaves the Image's div, set "hovered" to false
+4. Log "hovered" to the console so you know it's changing successfully.
