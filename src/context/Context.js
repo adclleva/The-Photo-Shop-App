@@ -20,7 +20,7 @@ function ContextProvider({children}) { // we are using functional components for
     }
 
     function toggleFavorited(photo_id) { // we don't want to modify state directly and this is to toggle the favorite functionality
-        const newPhotosWithFavorited = photos.map(photo => {
+        const newPhotosWithFavorited = photos.map(photo => { // we want to get the whole array back with the new changes
             if (photo.id === photo_id) {
                 return {
                     ...photo,
@@ -31,15 +31,15 @@ function ContextProvider({children}) { // we are using functional components for
             }
         })
 
-        setPhotos(newPhotosWithFavorited)
+        setPhotos(newPhotosWithFavorited) // with the new array we re-set the state of the photos
     } // we want to pass this function to our image component
 
-    function addToCart(photo_id) {
+    function addPhotoToCart(photo_id) {
         const photo = photos.filter(photoObj => { // we use filter because it does not filter the original array
             return photoObj.id == photo_id
         }) 
-        console.log(photo)
-        setCartItems(items => [...items, photo]) // this will get the photo and have it added to our cart
+        console.log(photo[0].url)
+        setCartItems(items => [...items, photo[0].url]) // this will get the photo and have it added to our cart
     }
 
     useEffect(() => {
@@ -48,7 +48,7 @@ function ContextProvider({children}) { // we are using functional components for
     },[]) // this fetches the api and sets it into the photos by using the useEffect hook once the component renders
     
     return(
-        <Context.Provider value={{photos: photos, toggleFavorited: toggleFavorited}}> {/** here we pass in an object which is the array of photos using the value of this context provider to be accessed within the child component, in this case it ill be sent to our app*/}
+        <Context.Provider value={{photos: photos, toggleFavorited: toggleFavorited, addPhotoToCart: addPhotoToCart }}> {/** here we pass in an object which is the array of photos using the value of this context provider to be accessed within the child component, in this case it ill be sent to our app*/}
             {children} {/** Since this is a custom component we need to render a child prop */}
         </Context.Provider>
     )
