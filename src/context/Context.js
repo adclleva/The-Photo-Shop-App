@@ -31,7 +31,6 @@ function ContextProvider({children}) { // we are using functional components for
         })
 
         setPhotos(newPhotosWithFavorited)
-        console.log(photos)
     } // we want to pass this function to our image component
 
     useEffect(() => {
