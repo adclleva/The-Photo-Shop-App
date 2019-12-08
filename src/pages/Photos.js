@@ -14,13 +14,13 @@ function Photos() { // this Photos component is to show all the image photos
     const displayPhotos = photos.map((photo, index) => {
         const { id, url } = photo
         return (
-            <Image key={id} id={id} className={getClass('big')} url={url}/>
+            <Image key={id} id={id} className={getClass(id)} url={url}/>
         )
     })
 
     return (
         <main className="photos">
-            <h1>{displayPhotos}</h1>
+            {displayPhotos}
         </main>
     )
 }
