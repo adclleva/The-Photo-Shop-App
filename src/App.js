@@ -11,10 +11,10 @@ function App() {
             <Header />
             <Switch> {/** this switch is here to display any of the components that we want */}
                 <Route exact path="/">
-                    <Photos />
+                    <Photos /> {/* we will be rendering the Photos Component Page*/}
                 </Route>
                 <Route exact path="/cart">
-                    <Cart />
+                    <Cart /> {/* we will be rendering the Cart Component Page*/}
                 </Route>
             </Switch>
             

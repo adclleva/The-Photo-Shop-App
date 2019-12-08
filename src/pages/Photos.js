@@ -11,11 +11,18 @@ function Photos() { // this Photos component is to show all the image photos
 
     const { photos } = useContext(Context) // this grabs the "photos state" passed down from the React Context file that we got
     
-    console.log("1 photos", photos)
+    const displayPhotos = photos.map((photo, index) => {
+        const { id, url } = photo
+        return (
+            <Image key={id} className={getClass(index)} url={url}/>
+        )
+    })
+
+    console.log(photos)
 
     return (
         <main className="photos">
-            <h1>Images go here</h1>
+            <h1>{displayPhotos}</h1>
         </main>
     )
 }
