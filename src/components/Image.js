@@ -13,8 +13,8 @@ function Image(props) { // we deconstuct the className and url from props in the
         setHovered(false)
     }
 
-    const displayHeart = hovered && <i className="icon ion-md-heart favorite"></i>
-    const displayCart = hovered && <i className="icon ion-md-add-circle cart"></i>
+    const displayHeart = hovered && <i className="icon ion-md-heart-empty favorite"></i> // we use the double & to do conditional rendering
+    const displayCart = hovered && <i className="icon ion-md-add-circle-outline cart"></i>
 
     return(
         <div 
