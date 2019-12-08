@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react'
 
 const Context = React.createContext() // we created a new context with React
+/**
+ * Creates a Context object. When React renders a component that subscribes to this 
+ * Context object it will read the current context value from the closest matching Provider above it in the tree.
+ */
 
 function ContextProvider({children}) { // we are using functional components for the Context and we can deconstruct the children from the props
     const [ photos, setPhotos ] = useState([]) // this will be an array of all photos our app gets from the API
