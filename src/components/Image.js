@@ -37,8 +37,7 @@ function Image(props) { // we deconstuct the className and url from props in the
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
         > {/** the css class will get a className from props and also the image-container*/}
-        
-            {displayHeart || displayEmptyHeart}
+            {displayHeart || displayEmptyHeart} {/** this will render if one or the other is true, this may be the incorrect way of using ||*/}
             {displayAddCart}
             <img src={url} className="image-grid" alt={`${id}`}/> {/** we are  displaying the specific image*/}
         
