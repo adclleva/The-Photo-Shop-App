@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react" // we'll be grabbing the state from the Context
 import { Context } from "../context/Context" // we'll use the Context object that we created to pass down the isFavorited function
                                              // we do a named import for Context
-import propTypes from "prop-types"
+import PropTypes from "prop-types" // we need to import the prop-types in order to use it
 
 function Image(props) { // we deconstuct the className and url from props in the arguments 
     const { className, photoObj } = props // these props are coming from the Photos page component
@@ -48,11 +48,17 @@ function Image(props) { // we deconstuct the className and url from props in the
     )
 }
 
-// here is adding the propTypes for Type checking the Image component
+// here is adding the propTypes for Type checking the Image component, a link shown below helps with understanding propTypes
+// https://reactjs.org/docs/typechecking-with-proptypes.html#proptypes
+Image.propTypes = { 
+    className: PropTypes.string,
 
-Image.propTypes = {  // the image should be an object with 
-
-}
+    photoObj: PropTypes.shape({ // An object taking on a particular shape by specifying their properties
+        id: PropTypes.string.isRequired,
+        url: PropTypes.string.isRequired,
+        isFavorite: PropTypes.bool.isRequired
+    }) 
+} // it is very good practice to use propTypes for helpng out with validation especially when refactoring, big projects, or working with groups.
 
 export default Image
 
