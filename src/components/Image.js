@@ -51,7 +51,7 @@ function Image(props) { // we deconstuct the className and url from props in the
 // here is adding the propTypes for Type checking the Image component, a link shown below helps with understanding propTypes
 // https://reactjs.org/docs/typechecking-with-proptypes.html#proptypes
 Image.propTypes = { 
-    className: PropTypes.string,
+    className: PropTypes.string, // since the function returns a string
 
     photoObj: PropTypes.shape({ // An object taking on a particular shape by specifying their properties
         id: PropTypes.string.isRequired,
