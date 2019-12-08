@@ -13,14 +13,18 @@ function Image(props) { // we deconstuct the className and url from props in the
         setHovered(false)
     }
 
+    const displayHeart = hovered && <i className="icon ion-md-heart-empty favorite"></i> // we use the double & to do conditional rendering
+    const displayCart = hovered && <i className="icon ion-md-add-circle-outline cart"></i>
+
     return(
         <div 
             className={`${className} image-container`}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
         > {/** the css class will get a className from props and also the image-container*/}
-            
-                <img src={url} className="image-grid" alt={`${id}`}/> {/** we are  displaying the specific image*/}
+            {displayHeart}
+            {displayCart}
+            <img src={url} className="image-grid" alt={`${id}`}/> {/** we are  displaying the specific image*/}
         
         </div>
     )

@@ -43,7 +43,7 @@ Get the allPhotos array from context
 map over it, creating <Image /> elements of the component we just made
 <Image key={???} img={<full image object here>} className={getClass(<index of image>)} />
 
-# Challenge
+# Challenge 6
 
 On the Image component, track the hover state
 
@@ -51,3 +51,13 @@ On the Image component, track the hover state
 2. When the mouse enters the Image's div, set "hovered" to true
 3. When the mouse leaves the Image's div, set "hovered" to false
 4. Log "hovered" to the console so you know it's changing successfully.
+
+# Challenge 7
+
+Conditionally render the heart and plus icons when an Image component is being hovered on
+
+1. Icon to render for the heart:
+<i className="ri-heart-line favorite"></i>
+
+2. Icon to render for the plus:
+<i className="ri-add-circle-line cart"></i>
