@@ -10,8 +10,10 @@ function Photos() { // this Photos component is to show all the image photos
                                                         
     const displayPhotos = photos.map((photo, index) => {
         const { id, url, isFavorite } = photo // we can get the isFavorited from the Context Provider
+                                              // even though we are passing the photo Object itself
+                                              // i left the object deconstructed to help us see what's being passed down
         return (
-            <Image key={id} id={id} className={getClass(id)} url={url} isFavorited={isFavorite}/>  
+            <Image key={id} className={getClass(id)} photoObj={photo}/>  // refactored to just pass down the photo object itself 
         )
     })
 
