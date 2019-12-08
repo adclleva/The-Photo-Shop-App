@@ -8,7 +8,8 @@ const Context = React.createContext() // we created a new context with React
 
 function ContextProvider({children}) { // we are using functional components for the Context and we can deconstruct the children from the props
     const [ photos, setPhotos ] = useState([]) // this will be an array of all photos our app gets from the API
-    
+    const [ cartItems, setCartItems ] = useState([]) // this state array will hold the photos images chosen by the user
+
     function getPhotos() { // this fetches the data from the API
         const url = "https://raw.githubusercontent.com/bobziroll/scrimba-react-bootcamp-images/master/images.json"
         return fetch(url) 
@@ -33,6 +34,14 @@ function ContextProvider({children}) { // we are using functional components for
         setPhotos(newPhotosWithFavorited)
     } // we want to pass this function to our image component
 
+    function addToCart(photo_id) {
+        const photo = photos.filter(photoObj => { // we use filter because it does not filter the original array
+            return photoObj.id == photo_id
+        }) 
+        console.log(photo)
+        setCartItems(items => [...items, photo]) // this will get the photo and have it added to our cart
+    }
+
     useEffect(() => {
         getPhotos() // we call the getPhotos function to getch the data
 
@@ -46,3 +55,10 @@ function ContextProvider({children}) { // we are using functional components for
 }
 
 export {ContextProvider, Context} // we are exporting a named export and we need to export the Context so we can use useContext later on
+
+// this is an example of the data that is given by the API
+// {
+//     "url": "https://github.com/bobziroll/scrimba-react-bootcamp-images/blob/master/pic1.jpg?raw=true",
+//     "id": "1",
+//     "isFavorite": false
+// }
