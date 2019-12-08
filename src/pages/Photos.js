@@ -1,4 +1,4 @@
-import React, { useContext } from "react"
+import React, { useContext } from "react" // we need this 
 
 import Image from "../components/Image"
 import { getClass } from "../utilities"
@@ -9,16 +9,14 @@ function Photos() { // this Photos component is to show all the image photos
 // map over it, creating <Image /> elements of the component we just made
 // <Image key={???} img={<full image object here>} className={getClass(<index of image>)} />
 
-    const { photos } = useContext(Context) // this grabs the "photos state" passed down from the React Context file that we got
+    const { photos } = useContext(Context) // this grabs the "photos state" passed down from the React Context Object that we got
     
     const displayPhotos = photos.map((photo, index) => {
         const { id, url } = photo
         return (
-            <Image key={id} className={getClass(index)} url={url}/>
+            <Image key={id} id={id} className={getClass('big')} url={url}/>
         )
     })
-
-    console.log(photos)
 
     return (
         <main className="photos">
