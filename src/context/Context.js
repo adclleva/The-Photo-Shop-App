@@ -18,8 +18,31 @@ function ContextProvider({children}) { // we are using functional components for
             })
     }
 
+    function isFavorited(photo_id) {
+        const photosAPI = [...photos] // create a copy of the photos array 
+        const newPhotosWithFavorited = photosAPI.map(photo => {
+            if (photo.id == photo_id) {
+                return {
+                    ...photo,
+                    isFavorite: true
+                }
+            } else {
+                return photo
+            }
+        })
+        console.log(newPhotosWithFavorited, "isFavorited")
+        setPhotos(newPhotosWithFavorited)
+
+    }
+
+    console.log(photos, "Context")
+
+
     useEffect(() => {
         getPhotos() // we call the getPhotos function to getch the data
+        .then(() => {
+            isFavorited(1)
+        })
     },[]) // this fetches the api and sets it into the photos by using the useEffect hook once the component renders
     
     return(
