@@ -35,11 +35,11 @@ function ContextProvider({children}) { // we are using functional components for
     } // we want to pass this function to our image component
 
     function addPhotoToCart(photo_id) {
-        const photo = photos.filter(photoObj => { // we use filter because it does not filter the original array
+        const photo = photos.find(photoObj => { // we use filter because it does not filter the original array
             return photoObj.id == photo_id
         }) 
-        console.log(photo[0].url)
-        setCartItems(items => [...items, photo[0].url]) // this will get the photo and have it added to our cart
+        console.log(photo.url)
+        setCartItems(items => [...items, photo.url]) // this will get the photo and have it added to our cart
     }
 
     useEffect(() => {

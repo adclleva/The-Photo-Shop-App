@@ -29,11 +29,14 @@ function Image(props) { // we deconstuct the className and url from props in the
     }
      
     function handleAddToCartClick(photo_id) { // this function handles what happens when they click on the add-circle-outline
-        addPhotoToCart(photo_id)
-        setIsAddedtoCart(!isAddedtoCart)
+        if (isAddedtoCart == false) { // this will make sure that the user can add an item to the cart once and it will replace the empty icon circle with a fill add icon
+            addPhotoToCart(photo_id) 
+            setIsAddedtoCart(true) // we don't want to toggle this as we want the user to add to the cart once
+        }
     }
 
     const displayHeart = isCurrentlyFavorited &&  <i className="icon ion-md-heart favorite"></i> // this is display the filled heart if the state is favorited
+    const displayAddedToCart = isAddedtoCart && <i className="icon ion-md-add-circle cart"></i> // this is to indcate that it was added to the cart
 
     const displayEmptyHeart = hovered && 
                                     <i className="icon ion-md-heart-empty favorite" 
@@ -52,7 +55,7 @@ function Image(props) { // we deconstuct the className and url from props in the
             onMouseLeave={handleMouseLeave}
         > {/** the css class will get a className from props and also the image-container*/}
             {displayHeart || displayEmptyHeart} {/** this will render if one or the other is true, this may be the incorrect way of using ||*/}
-            {displayAddCart}
+            {displayAddedToCart || displayAddCart} {/** the order of this matters because we want the filled circle to diaply over the empty on if it's been added to the cart */}
             <img src={url} className="image-grid" alt={`${id}`}/> {/** we are  displaying the specific image*/}
         
         </div>
