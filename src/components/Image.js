@@ -6,6 +6,7 @@ function Image(props) { // we deconstuct the className and url from props in the
     const { className, url, id, isFavorited } = props // these props are coming from the Photos page component
     const [ hovered, setHovered ] = useState(false)
     const [ isCurrentlyFavorited, setIsCurrentlyFavorited ] = useState(isFavorited) //created a state for the image to see if it is favorited so we can put the image on there
+                                                                                    // just realized that this may be reduntant but i left it here so it can be easier to understand
     const { toggleFavorited } = useContext(Context)
     /** Went here to look at event handlers for hovering https://reactjs.org/docs/events.html#mouse-events */
     function handleMouseEnter() { // this handles the state of the image to be hovered or not
@@ -21,7 +22,8 @@ function Image(props) { // we deconstuct the className and url from props in the
         setIsCurrentlyFavorited(!isCurrentlyFavorited)
     }
 
-    const displayHeart = isFavorited &&  <i className="icon ion-md-heart favorite"></i>
+    const displayHeart = isCurrentlyFavorited &&  <i className="icon ion-md-heart favorite"></i> // this is display the filled heart if the state is favorited
+
     const displayEmptyHeart = hovered && 
                                     <i className="icon ion-md-heart-empty favorite" 
                                        onClick={() => handleFavoriteClick(id)} // we use the onClick to change the isFavorite state for that specific id
@@ -35,8 +37,8 @@ function Image(props) { // we deconstuct the className and url from props in the
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
         > {/** the css class will get a className from props and also the image-container*/}
-            {displayHeart}
-            {displayEmptyHeart}
+        
+            {displayHeart || displayEmptyHeart}
             {displayAddCart}
             <img src={url} className="image-grid" alt={`${id}`}/> {/** we are  displaying the specific image*/}
         
