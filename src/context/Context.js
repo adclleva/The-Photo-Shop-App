@@ -18,12 +18,29 @@ function ContextProvider({children}) { // we are using functional components for
             })
     }
 
+    function toggleFavorited(photo_id) { // we don't want to modify state directly and this is to toggle the favorite functionality
+        const newPhotosWithFavorited = photos.map(photo => {
+            if (photo.id == photo_id) {
+                return {
+                    ...photo,
+                    isFavorite: !photo.isFavorite
+                }
+            } else {
+                return photo
+            }
+        })
+
+        setPhotos(newPhotosWithFavorited)
+        console.log(photos)
+    } // we want to pass this function to our image component
+
     useEffect(() => {
         getPhotos() // we call the getPhotos function to getch the data
+
     },[]) // this fetches the api and sets it into the photos by using the useEffect hook once the component renders
     
     return(
-        <Context.Provider value={{photos: photos}}> {/** here we pass in an object which is the array of photos using the value of this context provider to be accessed within the child component, in this case it ill be sent to our app*/}
+        <Context.Provider value={{photos: photos, toggleFavorited: toggleFavorited}}> {/** here we pass in an object which is the array of photos using the value of this context provider to be accessed within the child component, in this case it ill be sent to our app*/}
             {children} {/** Since this is a custom component we need to render a child prop */}
         </Context.Provider>
     )
