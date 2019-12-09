@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react" // we'll be grabbing the state from the Context
+import React, { useState, useContext, useEffect } from "react" // we'll be grabbing the state from the Context
 import { Context } from "../context/Context" // we'll use the Context object that we created to pass down the isFavorited function
                                              // we do a named import for Context
 import PropTypes from "prop-types" // we need to import the prop-types in order to use it
@@ -8,9 +8,14 @@ function Image(props) { // we deconstuct the className and url from props in the
     const { url, id, isFavorite } = photoObj // url, id, isFavorited are the properties that come from the photo object               
     
     const [ hovered, setHovered ] = useState(false) // determines if the image is hovered or not
-    const [ isAddedToCart, setIsAddedToCart ] = useState()
+    const [ isAddedToCart, setIsAddedToCart ] = useState(false) // this defaults to false 
 
-    const { photos, cartItems, toggleFavorited, addPhotoToCart } = useContext(Context)
+    // it looks like we don't really need to do this
+    // useEffect(() => { // this is to check if the item is in the cart previously
+    //     setIsAddedToCart(isItemInCart(photoObj))
+    // },[]) 
+
+    const { photos, cartItems, toggleFavorited, addPhotoToCart, removePhotoFromCart } = useContext(Context)
 
     /** Went here to look at event handlers for hovering https://reactjs.org/docs/events.html#mouse-events */
     function handleMouseEnter() { // this handles the state of the image to be hovered and sets it to true
@@ -33,15 +38,16 @@ function Image(props) { // we deconstuct the className and url from props in the
         }
     }
 
+    function handleRemoveItemFromCart(photoObj) { // here we create a function that handles the click to remove the photo object from the cart
+        removePhotoFromCart(photoObj) // this removes the item from the cart state
+        setIsAddedToCart(false) // we set this back to false so we can toggle if the item can be added or not
+    }
+
     function isItemInCart(photoObj) {
         return cartItems.some(cartItem => { // this returns a boolean if the the current item is in the cart
             return cartItem.id === photoObj.id
         }) 
     }
-
-    useState(() => {
-        setIsAddedToCart(isItemInCart(photoObj))
-    },[])
 
     function displayFavorite() { // refactored the displayFavorite icons to be in one function
         if (isFavorite) { // if this is true, it will always display the filled heart icon
@@ -57,9 +63,11 @@ function Image(props) { // we deconstuct the className and url from props in the
 
     function displayCart() {
         if (isAddedToCart) {
-            return <i className="icon ion-md-add-circle cart"></i> // this is to indcate that it was added to the cart
+            return  <i className="icon ri-shopping-cart-fill cart"
+                        onClick={() => handleRemoveItemFromCart(photoObj)} 
+                    ></i> // this is to indcate that it was added to the cart
         } else if (hovered) {
-            return  <i className="icon ion-md-add-circle-outline cart"
+            return  <i className="icon ion-md-add-circle-outline cart" 
                         onClick={() => handleAddToCartClick(photoObj)} // used the onClick to have the functionality to add the image to the cart
                     ></i>
         }
