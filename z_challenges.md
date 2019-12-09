@@ -128,3 +128,7 @@ Full class name to use WHEN ITEMS IN CART:
 
 Full class name to use WHEN CART IS EMPTY:
 "ri-shopping-cart-line ri-fw ri-2x"
+
+# Challenge 15
+
+Make it so clicking the trash icon on the Cart page removes that item from the cart
