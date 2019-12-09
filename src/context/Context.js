@@ -32,9 +32,11 @@ function ContextProvider({children}) { // we are using functional components for
         })
 
         setPhotos(newPhotosWithFavorited) // with the new array we re-set the state of the photos
+        console.log(photos)
     } // we want to pass this function to our image component
 
     function addPhotoToCart(photoObj) { // refactored what i had originally so we can use the photoObject and have it to our carts set array
+                                        // the photoObj is a prop that is passed from the Photos 
         setCartItems(prevCartItems => [...prevCartItems, photoObj]) // we want to copy the previous items and have them added to the cart
         console.log(cartItems)
     }
