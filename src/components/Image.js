@@ -10,7 +10,7 @@ function Image(props) { // we deconstuct the className and url from props in the
     const [ hovered, setHovered ] = useState(false) // determines if the image is hovered or not
     const [ isAddedToCart, setIsAddedToCart ] = useState()
 
-    const { photos, cartItems, toggleFavorited, addPhotoToCart } = useContext(Context)
+    const { photos, cartItems, toggleFavorited, addPhotoToCart, removePhotoFromCart } = useContext(Context)
 
     /** Went here to look at event handlers for hovering https://reactjs.org/docs/events.html#mouse-events */
     function handleMouseEnter() { // this handles the state of the image to be hovered and sets it to true
@@ -31,6 +31,11 @@ function Image(props) { // we deconstuct the className and url from props in the
             addPhotoToCart(photoObj) // this will make sure that the user can add an item to the cart once and it will replace the empty icon circle with a fill add icon
             setIsAddedToCart(true)
         }
+    }
+
+    function handleRemoveItemFromCart(photoObj) {
+        removePhotoFromCart(photoObj)
+        setIsAddedToCart(false) 
     }
 
     function isItemInCart(photoObj) {
@@ -57,7 +62,9 @@ function Image(props) { // we deconstuct the className and url from props in the
 
     function displayCart() {
         if (isAddedToCart) {
-            return <i className="icon ri-shopping-cart-fill cart"></i> // this is to indcate that it was added to the cart
+            return  <i className="icon ri-shopping-cart-fill cart"
+                        onClick={() => handleRemoveItemFromCart(photoObj)} 
+                    ></i> // this is to indcate that it was added to the cart
         } else if (hovered) {
             return  <i className="icon ion-md-add-circle-outline cart" 
                         onClick={() => handleAddToCartClick(photoObj)} // used the onClick to have the functionality to add the image to the cart

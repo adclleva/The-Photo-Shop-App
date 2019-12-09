@@ -40,14 +40,24 @@ function ContextProvider({children}) { // we are using functional components for
         console.log(cartItems)
     }
 
-    useEffect(() => {console.log(cartItems)}, [cartItems]) 
+    function removePhotoFromCart(photoObj) {
+        const newCartItems = cartItems.filter(item => {
+            const { id } = item
+            return photoObj.id != id
+        })
+
+        setCartItems(newCartItems)
+    }
+
+    useEffect(() => {console.log(cartItems)}, [cartItems]) // this is for debugging to check the cartItems array
+
     useEffect(() => {
         getPhotos() // we call the getPhotos function to getch the data
 
     },[]) // this fetches the api and sets it into the photos by using the useEffect hook once the component renders
     
     return(
-        <Context.Provider value={{photos: photos, toggleFavorited: toggleFavorited, addPhotoToCart: addPhotoToCart, cartItems: cartItems }}> {/** here we pass in an object which is the array of photos using the value of this context provider to be accessed within the child component, in this case it ill be sent to our app*/}
+        <Context.Provider value={{photos: photos, toggleFavorited, addPhotoToCart, cartItems, removePhotoFromCart }}> {/** here we pass in an object which is the array of photos using the value of this context provider to be accessed within the child component, in this case it ill be sent to our app*/}
             {children} {/** Since this is a custom component we need to render a child prop */}
         </Context.Provider>
     )
