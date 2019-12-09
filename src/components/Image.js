@@ -63,7 +63,7 @@ function Image(props) { // we deconstuct the className and url from props in the
 
     function displayCart() {
         if (isAddedToCart) {
-            return  <i className="icon ri-shopping-cart-fill cart"
+            return  <i className="icon ri-shopping-cart-2-fill cart"
                         onClick={() => handleRemoveItemFromCart(photoObj)} 
                     ></i> // this is to indcate that it was added to the cart
         } else if (hovered) {

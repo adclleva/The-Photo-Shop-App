@@ -118,3 +118,13 @@ https://stackoverflow.com/a/8217584
 # Challenge 13
 
 Make it so clicking the little shopping cart icon on the image removes the item from the cart
+
+# Challenge 14
+
+Change the cart icon in the header to display the full cart icon if there are any items in the cart
+
+Full class name to use WHEN ITEMS IN CART:
+"ri-shopping-cart-fill ri-fw ri-2x"
+
+Full class name to use WHEN CART IS EMPTY:
+"ri-shopping-cart-line ri-fw ri-2x"
