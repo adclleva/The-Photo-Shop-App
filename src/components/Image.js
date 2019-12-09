@@ -57,9 +57,9 @@ function Image(props) { // we deconstuct the className and url from props in the
 
     function displayCart() {
         if (isAddedToCart) {
-            return <i className="icon ion-md-add-circle cart"></i> // this is to indcate that it was added to the cart
+            return <i className="icon ri-shopping-cart-fill cart"></i> // this is to indcate that it was added to the cart
         } else if (hovered) {
-            return  <i className="icon ion-md-add-circle-outline cart"
+            return  <i className="icon ion-md-add-circle-outline cart" 
                         onClick={() => handleAddToCartClick(photoObj)} // used the onClick to have the functionality to add the image to the cart
                     ></i>
         }

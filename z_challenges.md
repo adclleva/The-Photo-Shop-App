@@ -114,3 +114,7 @@ Hints:
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some
 https://stackoverflow.com/a/8217584
+
+# Challenge 13
+
+Make it so clicking the little shopping cart icon on the image removes the item from the cart
