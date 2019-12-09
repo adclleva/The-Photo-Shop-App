@@ -40,10 +40,10 @@ function ContextProvider({children}) { // we are using functional components for
         console.log(cartItems)
     }
 
-    function removePhotoFromCart(photoObj) {
-        const newCartItems = cartItems.filter(item => {
+    function removePhotoFromCart(photoObj) { // we pass in an object of the item that we want to remove
+        const newCartItems = cartItems.filter(item => { // we want to get a new array that doesn't match the object and we use the id's to compare
             const { id } = item
-            return photoObj.id != id
+            return photoObj.id !== id
         })
 
         setCartItems(newCartItems)
