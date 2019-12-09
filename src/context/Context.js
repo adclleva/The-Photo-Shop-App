@@ -34,12 +34,9 @@ function ContextProvider({children}) { // we are using functional components for
         setPhotos(newPhotosWithFavorited) // with the new array we re-set the state of the photos
     } // we want to pass this function to our image component
 
-    function addPhotoToCart(photo_id) {
-        const photo = photos.find(photoObj => { // we use filter because it does not filter the original array
-            return photoObj.id == photo_id
-        }) 
-        console.log(photo.url)
-        setCartItems(items => [...items, photo.url]) // this will get the photo and have it added to our cart
+    function addPhotoToCart(photoObj) { // refactored what i had originally so we can use the photoObject and have it to our carts set array
+        setCartItems(prevCartItems => [...prevCartItems, photoObj]) // we want to copy the previous items and have them added to the cart
+        console.log(cartItems)
     }
 
     useEffect(() => {
