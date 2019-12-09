@@ -55,13 +55,15 @@ function Image(props) { // we deconstuct the className and url from props in the
         }
     }
 
-    const displayAddedToCart = isAddedToCart && <i className="icon ion-md-add-circle cart"></i> // this is to indcate that it was added to the cart
-
-                                  
-    const displayAddCart = hovered &&
-                                     <i className="icon ion-md-add-circle-outline cart"
-                                        onClick={() => handleAddToCartClick(photoObj)} // used the onClick to have the functionality to add the image to the cart
-                                     ></i>
+    function displayCart() {
+        if (isAddedToCart) {
+            return <i className="icon ion-md-add-circle cart"></i> // this is to indcate that it was added to the cart
+        } else if (hovered) {
+            return  <i className="icon ion-md-add-circle-outline cart"
+                        onClick={() => handleAddToCartClick(photoObj)} // used the onClick to have the functionality to add the image to the cart
+                    ></i>
+        }
+    }
 
     return(
         <div 
@@ -70,8 +72,7 @@ function Image(props) { // we deconstuct the className and url from props in the
             onMouseLeave={handleMouseLeave}
         > {/** the css class will get a className from props and also the image-container*/}
             {displayFavorite()} {/** made sure to render the function with parethesis so it can return either one of icons */}
-            {displayAddedToCart} 
-            {displayAddCart} {/* the order of this matters because we want the filled circle to diaply over the empty on if it's been added to the cart */}
+            {displayCart()} {/** refactored this in the same faction as the displayFavorite() where we call the function to only render one icon */}
             <img src={url} className="image-grid" alt={`${id}`}/> {/** we are  displaying the specific image*/}
         
         </div>

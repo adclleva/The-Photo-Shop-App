@@ -40,6 +40,7 @@ function ContextProvider({children}) { // we are using functional components for
         console.log(cartItems)
     }
 
+    useEffect(() => {console.log(cartItems)}, [cartItems]) 
     useEffect(() => {
         getPhotos() // we call the getPhotos function to getch the data
 
