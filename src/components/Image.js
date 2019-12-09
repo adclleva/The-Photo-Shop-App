@@ -5,34 +5,63 @@ import PropTypes from "prop-types" // we need to import the prop-types in order 
 
 function Image(props) { // we deconstuct the className and url from props in the arguments 
     const { className, photoObj } = props // these props are coming from the Photos page component
-    const { url, id, isFavorited } = photoObj // url, id, isFavorited are the properties that come from the photo object               
+    const { url, id, isFavorite } = photoObj // url, id, isFavorited are the properties that come from the photo object               
+    
+    const [ hovered, setHovered ] = useState(false) // determines if the image is hovered or not
+    const [ isAddedToCart, setIsAddedToCart ] = useState()
 
-    const [ hovered, setHovered ] = useState(false)
-    const [ isCurrentlyFavorited, setIsCurrentlyFavorited ] = useState(isFavorited) //created a state for the image to see if it is favorited so we can put the image on there
-                                                                                    // just realized that this may be reduntant but i left it here so it can be easier to understand
-    const { toggleFavorited } = useContext(Context)
+    const { photos, cartItems, toggleFavorited, addPhotoToCart } = useContext(Context)
+
     /** Went here to look at event handlers for hovering https://reactjs.org/docs/events.html#mouse-events */
-    function handleMouseEnter() { // this handles the state of the image to be hovered or not
+    function handleMouseEnter() { // this handles the state of the image to be hovered and sets it to true
         setHovered(true)
     }
     
-    function handleMouseLeave() {
+    function handleMouseLeave() { // this handles what happens when the image is not hovered and it sets the state to false
         setHovered(false)
     }
 
-    function handleFavoriteClick(photo_id) {
+    function handleFavoriteClick(photo_id) { // this function handles what happens when a user clicks on the heart
         toggleFavorited(photo_id)
-        setIsCurrentlyFavorited(!isCurrentlyFavorited)
+    }
+     
+    // the photoObj is what gets passed down as a prop from Photos Component
+    function handleAddToCartClick(photoObj) { // this function handles what happens when they click on the add-circle-outline
+        if (!isAddedToCart) { // if the item is not in the cart
+            addPhotoToCart(photoObj) // this will make sure that the user can add an item to the cart once and it will replace the empty icon circle with a fill add icon
+            setIsAddedToCart(true)
+        }
     }
 
-    const displayHeart = isCurrentlyFavorited &&  <i className="icon ion-md-heart favorite"></i> // this is display the filled heart if the state is favorited
+    function isItemInCart(photoObj) {
+        return cartItems.some(cartItem => { // this returns a boolean if the the current item is in the cart
+            return cartItem.id === photoObj.id
+        }) 
+    }
 
-    const displayEmptyHeart = hovered && 
-                                    <i className="icon ion-md-heart-empty favorite" 
-                                       onClick={() => handleFavoriteClick(id)} // we use the onClick to change the isFavorite state for that specific id
-                                    ></i> // we use the double & to do conditional rendering
+    useState(() => {
+        setIsAddedToCart(isItemInCart(photoObj))
+    },[])
 
-    const displayAddCart = hovered && <i className="icon ion-md-add-circle-outline cart"></i>
+    function displayFavorite() { // refactored the displayFavorite icons to be in one function
+        if (isFavorite) { // if this is true, it will always display the filled heart icon
+            return  <i className="icon ion-md-heart favorite"
+                        onClick={() => handleFavoriteClick(id)} // we use the onClick to change the isFavorite state for that specific id 
+                    ></i> // this is display the filled heart if the state is favorited
+        } else if (hovered) { // if it's only hovered, it will display an empty heart
+            return  <i className="icon ion-md-heart-empty favorite" 
+                        onClick={() => handleFavoriteClick(id)} // we use the onClick to change the isFavorite state for that specific id
+                    ></i> 
+        }
+    }
+
+    const displayAddedToCart = isAddedToCart && <i className="icon ion-md-add-circle cart"></i> // this is to indcate that it was added to the cart
+
+                                  
+    const displayAddCart = hovered &&
+                                     <i className="icon ion-md-add-circle-outline cart"
+                                        onClick={() => handleAddToCartClick(photoObj)} // used the onClick to have the functionality to add the image to the cart
+                                     ></i>
 
     return(
         <div 
@@ -40,8 +69,9 @@ function Image(props) { // we deconstuct the className and url from props in the
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
         > {/** the css class will get a className from props and also the image-container*/}
-            {displayHeart || displayEmptyHeart} {/** this will render if one or the other is true, this may be the incorrect way of using ||*/}
-            {displayAddCart}
+            {displayFavorite()} {/** made sure to render the function with parethesis so it can return either one of icons */}
+            {displayAddedToCart} 
+            {displayAddCart} {/* the order of this matters because we want the filled circle to diaply over the empty on if it's been added to the cart */}
             <img src={url} className="image-grid" alt={`${id}`}/> {/** we are  displaying the specific image*/}
         
         </div>
