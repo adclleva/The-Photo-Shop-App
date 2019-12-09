@@ -43,14 +43,21 @@ function Image(props) { // we deconstuct the className and url from props in the
         setIsAddedToCart(isItemInCart(photoObj))
     },[])
 
-    const displayHeart = isFavorite &&  <i className="icon ion-md-heart favorite"></i> // this is display the filled heart if the state is favorited
+    function displayFavorite() { // refactored the displayFavorite icons to be in one function
+        if (isFavorite) { // if this is true, it will always display the filled heart icon
+            return  <i className="icon ion-md-heart favorite"
+                        onClick={() => handleFavoriteClick(id)} // we use the onClick to change the isFavorite state for that specific id 
+                    ></i> // this is display the filled heart if the state is favorited
+        } else if (hovered) { // if it's only hovered, it will display an empty heart
+            return  <i className="icon ion-md-heart-empty favorite" 
+                        onClick={() => handleFavoriteClick(id)} // we use the onClick to change the isFavorite state for that specific id
+                    ></i> 
+        }
+    }
+
     const displayAddedToCart = isAddedToCart && <i className="icon ion-md-add-circle cart"></i> // this is to indcate that it was added to the cart
 
-    const displayEmptyHeart = hovered && 
-                                    <i className="icon ion-md-heart-empty favorite" 
-                                       onClick={() => handleFavoriteClick(id)} // we use the onClick to change the isFavorite state for that specific id
-                                    ></i> // we use the double & to do conditional rendering
-
+                                  
     const displayAddCart = hovered &&
                                      <i className="icon ion-md-add-circle-outline cart"
                                         onClick={() => handleAddToCartClick(photoObj)} // used the onClick to have the functionality to add the image to the cart
@@ -62,8 +69,7 @@ function Image(props) { // we deconstuct the className and url from props in the
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
         > {/** the css class will get a className from props and also the image-container*/}
-            {displayHeart} 
-            {displayEmptyHeart} {/** this will render if one or the other is true, this may be the incorrect way of using ||*/}
+            {displayFavorite()} {/** made sure to render the function with parethesis so it can return either one of icons */}
             {displayAddedToCart} 
             {displayAddCart} {/* the order of this matters because we want the filled circle to diaply over the empty on if it's been added to the cart */}
             <img src={url} className="image-grid" alt={`${id}`}/> {/** we are  displaying the specific image*/}
