@@ -8,7 +8,7 @@ function Photos() { // this Photos component is to show all the image photos
 
     const { photos } = useContext(Context) // this grabs the "photos state" passed down from the React Context Object that we got
                                                         
-    const displayPhotos = photos.map((photo, index) => {
+    const displayPhotos = photos.map((photo, index) => { // the photos are an object
         const { id, url, isFavorite } = photo // we can get the isFavorited from the Context Provider
                                               // even though we are passing the photo Object itself
                                               // i left the object deconstructed to help us see what's being passed down
