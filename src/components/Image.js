@@ -8,8 +8,9 @@ function Image(props) { // we deconstuct the className and url from props in the
     const { url, id, isFavorite } = photoObj // url, id, isFavorited are the properties that come from the photo object               
     
     const [ hovered, setHovered ] = useState(false) // determines if the image is hovered or not
-    
-    const { photos, toggleFavorited, addPhotoToCart } = useContext(Context)
+    const [ isAddedToCart, setIsAddedToCart ] = useState()
+
+    const { photos, cartItems, toggleFavorited, addPhotoToCart } = useContext(Context)
 
     /** Went here to look at event handlers for hovering https://reactjs.org/docs/events.html#mouse-events */
     function handleMouseEnter() { // this handles the state of the image to be hovered and sets it to true
@@ -26,13 +27,24 @@ function Image(props) { // we deconstuct the className and url from props in the
      
     // the photoObj is what gets passed down as a prop from Photos Component
     function handleAddToCartClick(photoObj) { // this function handles what happens when they click on the add-circle-outline
-                                              // this will make sure that the user can add an item to the cart once and it will replace the empty icon circle with a fill add icon
-                                              // we don't want to toggle this as we want the user to add to the cart once
-        
+        if (!isAddedToCart) { // if the item is not in the cart
+            addPhotoToCart(photoObj) // this will make sure that the user can add an item to the cart once and it will replace the empty icon circle with a fill add icon
+            setIsAddedToCart(true)
+        }
     }
 
+    function isItemInCart(photoObj) {
+        return cartItems.some(cartItem => { // this returns a boolean if the the current item is in the cart
+            return cartItem.id === photoObj.id
+        }) 
+    }
+
+    useState(() => {
+        setIsAddedToCart(isItemInCart(photoObj))
+    },[])
+
     const displayHeart = isFavorite &&  <i className="icon ion-md-heart favorite"></i> // this is display the filled heart if the state is favorited
-    // const displayAddedToCart = isAddedtoCart && <i className="icon ion-md-add-circle cart"></i> // this is to indcate that it was added to the cart
+    const displayAddedToCart = isAddedToCart && <i className="icon ion-md-add-circle cart"></i> // this is to indcate that it was added to the cart
 
     const displayEmptyHeart = hovered && 
                                     <i className="icon ion-md-heart-empty favorite" 
@@ -50,9 +62,10 @@ function Image(props) { // we deconstuct the className and url from props in the
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
         > {/** the css class will get a className from props and also the image-container*/}
-            {displayHeart} {
-            displayEmptyHeart} {/** this will render if one or the other is true, this may be the incorrect way of using ||*/}
-            {/* {displayAddedToCart || displayAddCart} * the order of this matters because we want the filled circle to diaply over the empty on if it's been added to the cart */}
+            {displayHeart} 
+            {displayEmptyHeart} {/** this will render if one or the other is true, this may be the incorrect way of using ||*/}
+            {displayAddedToCart} 
+            {displayAddCart} {/* the order of this matters because we want the filled circle to diaply over the empty on if it's been added to the cart */}
             <img src={url} className="image-grid" alt={`${id}`}/> {/** we are  displaying the specific image*/}
         
         </div>
